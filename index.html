@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CyberTech — Soluções de Software</title>
+  <meta name="description" content="Conheça nossas soluções de software e fale com um consultor.">
+
+  <style>
+    :root {
+      --bg: #030504;
+      --bg-2: #07100a;
+      --card: rgba(7, 18, 10, .82);
+      --green: #00ff66;
+      --green-2: #00c853;
+      --text: #f1fff5;
+      --muted: #8ba493;
+      --border: rgba(0, 255, 102, .18);
+      --shadow: 0 0 45px rgba(0, 255, 102, .10);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 50% -10%, rgba(0,255,102,.14), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .08;
+      background-image:
+        linear-gradient(rgba(0,255,102,.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,102,.15) 1px, transparent 1px);
+      background-size: 45px 45px;
+      mask-image: linear-gradient(to bottom, black, transparent 75%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    /* NAV */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(3,5,4,.72);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: var(--green);
+      text-shadow: 0 0 18px rgba(0,255,102,.55);
+    }
+
+    .nav-link {
+      color: var(--muted);
+      font-size: 14px;
+      transition: .2s;
+    }
+
+    .nav-link:hover {
+      color: var(--green);
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 130px 0 80px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      background: rgba(0,255,102,.05);
+      color: var(--green);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--green);
+    }
+
+    h1 {
+      font-size: clamp(42px, 6vw, 78px);
+      line-height: .98;
+      letter-spacing: -3px;
+      margin-bottom: 25px;
+    }
+
+    h1 span {
+      color: var(--green);
+      text-shadow: 0 0 30px rgba(0,255,102,.25);
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 620px;
+      font-size: 18px;
+      line-height: 1.7;
+      margin-bottom: 35px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 23px;
+      border-radius: 10px;
+      font-weight: 800;
+      transition: .25s;
+    }
+
+    .btn-primary {
+      color: #001b09;
+      background: var(--green);
+      box-shadow: 0 0 30px rgba(0,255,102,.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 45px rgba(0,255,102,.4);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: rgba(255,255,255,.02);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    /* TERMINAL */
+
+    .terminal {
+      border: 1px solid var(--border);
+      background: linear-gradient(145deg, rgba(8,22,12,.9), rgba(2,7,4,.95));
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .terminal-head {
+      height: 44px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 16px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,0,0,.25);
+    }
+
+    .terminal-head i {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #1cff70;
+      opacity: .8;
+    }
+
+    .terminal-body {
+      padding: 25px;
+      font-family: "Courier New", monospace;
+      font-size: 13px;
+      line-height: 2;
+      color: #7affaa;
+    }
+
+    .terminal-body .dim {
+      color: #50735b;
+    }
+
+    .terminal-body .white {
+      color: #dfffe9;
+    }
+
+    /* SECTIONS */
+
+    section {
+      padding: 100px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-head small {
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 11px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(30px, 4vw, 48px);
+      margin: 12px 0;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 620px;
+      margin: auto;
+      line-height: 1.7;
+    }
+
+    /* PRODUCTS */
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      padding: 32px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      transition: .3s;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      background: var(--green);
+      filter: blur(100px);
+      opacity: .06;
+      top: -80px;
+      right: -70px;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0,255,102,.4);
+    }
+
+    .card-number {
+      color: var(--green);
+      font-family: monospace;
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+
+    .card p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 25px;
+    }
+
+    .features {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .features li {
+      color: #c7d8cc;
+      font-size: 14px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .features li::before {
+      content: "✓";
+      color: var(--green);
+      font-weight: bold;
+    }
+
+    /* CTA */
+
+    .cta {
+      text-align: center;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 70px 30px;
+      background:
+        radial-gradient(circle at center, rgba(0,255,102,.10), transparent 55%),
+        var(--bg-2);
+      box-shadow: var(--shadow);
+    }
+
+    .cta h2 {
+      font-size: clamp(32px, 5vw, 55px);
+      margin-bottom: 18px;
+    }
+
+    .cta p {
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 30px;
+      line-height: 1.7;
+    }
+
+    /* FAQ */
+
+    .faq {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    details {
+      border-bottom: 1px solid var(--border);
+      padding: 22px 0;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: #dfffe9;
+    }
+
+    details p {
+      color: var(--muted);
+      line-height: 1.7;
+      padding-top: 15px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 30px 0;
+      color: #597061;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 800px) {
+      .hero-grid,
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 120px;
+      }
+
+      .hero-grid {
+        gap: 45px;
+      }
+
+      .terminal {
+        order: -1;
+      }
+
+      section {
+        padding: 75px 0;
+      }
+
+      .nav-link {
+        display: none;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .card {
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <div class="logo">&lt;CYBERTECH/&gt;</div>
+
+      <a class="nav-link" href="#produtos">
+        SOLUÇÕES
+      </a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+
+        <div>
+          <div class="eyebrow">
+            <span class="dot"></span>
+            Software & Tecnologia
+          </div>
+
+          <h1>
+            Tecnologia<br>
+            <span>sem complicação.</span>
+          </h1>
+
+          <p>
+            Conheça nossas soluções de software e encontre a opção
+            adequada às suas necessidades. Atendimento direto e suporte
+            para tirar suas dúvidas.
+          </p>
+
+          <div class="buttons">
+            <a
+              class="btn btn-primary"
+              href="https://t.me/aka_akazin"
+              target="_blank"
+              rel="noopener"
+            >
+              Falar no Telegram →
+            </a>
+
+            <a class="btn btn-outline" href="#produtos">
+              Ver soluções
+            </a>
+          </div>
+        </div>
+
+        <div class="terminal">
+          <div class="terminal-head">
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
+
+          <div class="terminal-body">
+            <div class="dim">$ initializing...</div>
+            <div class="white">system.status = <span>ONLINE</span></div>
+            <div>security.mode = ACTIVE</div>
+            <div>software.available = 02</div>
+            <br>
+            <div class="dim">// available solutions</div>
+            <div>01 → BTMOB 4.6.1</div>
+            <div>02 → EAGLESPY</div>
+            <br>
+            <div class="white">ready_for_contact = true</div>
+            <div class="dim">$ _</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PRODUTOS -->
+    <section id="produtos">
+      <div class="container">
+
+        <div class="section-head">
+          <small>// soluções</small>
+          <h2>Conheça os softwares</h2>
+          <p>
+            Consulte disponibilidade, versões, licenciamento e demais
+            informações diretamente com nosso atendimento.
+          </p>
+        </div>
+
+        <div class="products">
+
+  <article class="card">
+    <div class="card-number">01 / SOFTWARE</div>
+
+    <h3>BTMOB 4.6.1</h3>
+
+    <div class="price">
+      R$ 1.500,00
+    </div>
+
+    <p>
+      Solução de software disponibilizada através de nosso
+      canal de atendimento e comercialização.
+    </p>
+
+    <ul class="features">
+      <li>Versão 4.6.1</li>
+      <li>Licenciamento</li>
+      <li>Atendimento direto</li>
+      <li>Orientação sobre utilização autorizada</li>
+    </ul>
+
+    <a
+      class="btn btn-primary"
+      href="https://t.me/aka_akazin"
+      target="_blank"
+      rel="noopener"
+      style="width:100%; margin-top:25px;"
+    >
+      Comprar / Consultar →
+    </a>
+  </article>
+
+
+  <article class="card">
+    <div class="card-number">02 / SOFTWARE</div>
+
+    <h3>EAGLESPY V5</h3>
+
+    <div class="price">
+      R$ 750,00
+    </div>
+
+    <p>
+      Consulte informações sobre disponibilidade, licenciamento
+      e condições comerciais através do atendimento.
+    </p>
+
+    <ul class="features">
+      <li>Versão V5</li>
+      <li>Licenciamento</li>
+      <li>Atendimento comercial</li>
+      <li>Orientação sobre utilização autorizada</li>
+    </ul>
+
+    <a
+      class="btn btn-primary"
+      href="https://t.me/aka_akazin"
+      target="_blank"
+      rel="noopener"
+      style="width:100%; margin-top:25px;"
+    >
+      Comprar / Consultar →
+    </a>
+  </article>
+
+</div>
+
+
+      </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section>
+      <div class="container">
+
+        <div class="section-head">
+          <small>// atendimento</small>
+          <h2>Como funciona?</h2>
+          <p>
+            Um processo simples para você obter informações antes
+            de escolher uma solução.
+          </p>
+        </div>
+
+        <div class="products">
+
+          <article class="card">
+            <div class="card-number">01</div>
+            <h3>Entre em contato</h3>
+            <p>
+              Chame nosso atendimento pelo Telegram e informe qual
+              solução deseja conhecer.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-number">02</div>
+            <h3>Tire suas dúvidas</h3>
+            <p>
+              Receba informações sobre versões, disponibilidade,
+              licenciamento e condições comerciais.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section>
+      <div class="container">
+
+        <div class="cta">
+          <h2>Quer saber mais?</h2>
+
+          <p>
+            Fale diretamente conosco pelo Telegram e consulte
+            disponibilidade e informações sobre os softwares.
+          </p>
+
+          <a
+            class="btn btn-primary"
+            href="https://t.me/aka_akazin"
+            target="_blank"
+            rel="noopener"
+          >
+            Abrir Telegram →
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section>
+      <div class="container">
+
+        <div class="section-head">
+          <small>// dúvidas</small>
+          <h2>Perguntas frequentes</h2>
+        </div>
+
+        <div class="faq">
+
+          <details>
+            <summary>Como faço para obter informações?</summary>
+            <p>
+              Entre em contato pelo Telegram. O atendimento poderá
+              informar versões disponíveis, licenciamento e condições
+              comerciais.
+            </p>
+          </details>
+
+          <details>
+            <summary>Vocês trabalham com outras versões?</summary>
+            <p>
+              Consulte nosso atendimento para verificar as versões
+              atualmente disponíveis.
+            </p>
+          </details>
+
+          <details>
+            <summary>Existe suporte?</summary>
+            <p>
+              As condições de suporte e atendimento podem ser
+              consultadas diretamente pelo Telegram.
+            </p>
+          </details>
+
+          <details>
+            <summary>O uso dos softwares é autorizado?</summary>
+            <p>
+              O cliente é responsável por utilizar qualquer software
+              somente em dispositivos, contas e ambientes para os
+              quais possua autorização e respeitando a legislação
+              aplicável.
+            </p>
+          </details>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 CyberTech — Todos os direitos reservados.
+  </footer>
+
+</body>
+</html>
